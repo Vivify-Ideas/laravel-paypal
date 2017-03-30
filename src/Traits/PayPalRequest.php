@@ -206,11 +206,18 @@ trait PayPalRequest
      *
      * @return array
      */
-    public function refundTransaction($transaction)
+    public function refundTransaction($transaction, $amount = 0.00)
     {
         $post = [
             'TRANSACTIONID' => $transaction,
         ];
+
+        if ($amount > 0) {
+            $post = array_merge($post, [
+                'REFUNDTYPE' => 'Partial',
+                'AMT'        => $amount,
+            ]);
+        }
 
         $response = $this->doPayPalRequest('RefundTransaction', $post);
 
