@@ -239,6 +239,22 @@ trait PayPalRequest
     }
 
     /**
+     * Get Transaction details from PayPal.
+     *
+     * @param array $transactionId
+     *
+     * ['TRANSACTIONID' => 'xxxxxxxxxxx']
+     *
+     * @return array
+     */
+    public function getTransactionDetails(array $transactionId)
+    {
+        $response = $this->doPayPalRequest('GetTransactionDetails', $transactionId);
+
+        return $response;
+    }
+
+    /**
      * Function To Perform PayPal API Request.
      *
      * @param string $method
